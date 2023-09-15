@@ -1,0 +1,57 @@
+﻿@model OnlineDellShowroom.Models.UserSignup
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "ViewById";
+}
+
+<h2>View User Details</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>First Name</th>
+            <td>@Html.DisplayFor(model => model.Firstname)</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Html.DisplayFor(model => model.Lastname)</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>@Html.DisplayFor(model => model.Dateofbirth)</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>@Html.DisplayFor(model => model.Gender)</td>
+        </tr>
+        <tr>
+            <th>Mobile Number</th>
+            <td>@Html.DisplayFor(model => model.Mobilenumber)</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>@Html.DisplayFor(model => model.Address)</td>
+        </tr>
+        <tr>
+            <th>State</th>
+            <td>@Html.DisplayFor(model => model.State)</td>
+        </tr>
+        <tr>
+            <th>City</th>
+            <td>@Html.DisplayFor(model => model.City)</td>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td>@Html.DisplayFor(model => model.Username)</td>
+        </tr>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "UserDetails")
+</p>

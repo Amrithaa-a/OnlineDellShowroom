@@ -1,0 +1,23 @@
+﻿@model OnlineDellShowroom.Models.Laptop
+
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "Delete Laptop";
+}
+
+<h2 class="text-center mt-4">Delete Laptop</h2>
+
+<div class="container mt-4">
+    <h3>@Model.LaptopName</h3>
+    <p>@Model.Description</p>
+    <p>Price: $@Model.Price</p>
+
+    <p>Are you sure you want to delete this laptop?</p>
+
+    @using (Html.BeginForm("DeleteLaptopConfirmed", "Admin", new { id = Model.LaptopId }, FormMethod.Post))
+    {
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("ProductList", "Admin")" class="btn btn-secondary">Cancel</a>
+    }
+
+</div>

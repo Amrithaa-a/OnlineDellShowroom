@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "Admin Page";
+}
+<main>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="card bg-light p-4 rounded-lg shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Welcome, Admin!</h2>
+                        <p class="card-text lead">You are logged in as an admin. Here's a summary of the website's statistics and recent activities:</p>
+                        <div class="card mb-4">
+                            <div class="card-body bg-light p-4 rounded-lg shadow">
+                                <h5 class="card-title text-center">Website Statistics</h5>
+                                <ul class="list-unstyled text-center">
+                                    <li>Total Users: @Model.TotalUsers</li>
+                                    <li>Total Products: @Model.TotalProducts</li>
+                                    <li>Total Orders: @Model.TotalOrders</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

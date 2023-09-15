@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Online dell showroom</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/Content/CSS/User.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="~/Content/Images/delltechnologies.png" alt="Dell Logo" height="30" />
+            </a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Sign in", "UserSignin", "User", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Sign up", "UserSignup", "User", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="footer bg-light py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Product Categories</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Desktops & All-in-Ones</a></li>
+                            <li><a href="#">Gaming</a></li>
+                            <li><a href="#">Monitors</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Support</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Product Support</a></li>
+                            <li><a href="#">Drivers & Downloads</a></li>
+                            <li><a href="#">Warranty & Contracts</a></li>
+                            <li><a href="#">Contact Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Company</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About Dell</a></li>
+                            <li><a href="#">Investors</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Newsroom</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr> 
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <p><i class="fa fa-envelope"></i> support@dellshowroom.com</p>
+                        <p><i class="fa fa-phone"></i> +1 123-456-7890</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 text-center">
+                        <p>&copy; @DateTime.Now.Year - Dell Inc. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

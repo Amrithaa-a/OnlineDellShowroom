@@ -1,0 +1,76 @@
+﻿
+@model OnlineDellShowroom.Models.UserSignup
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mt-4 text-center">Delete User?</h2>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Firstname)</th>
+                            <td>@Html.DisplayFor(model => model.Firstname)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Lastname)</th>
+                            <td>@Html.DisplayFor(model => model.Lastname)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Dateofbirth)</th>
+                            <td>@Html.DisplayFor(model => model.Dateofbirth)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                            <td>@Html.DisplayFor(model => model.Gender)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Mobilenumber)</th>
+                            <td>@Html.DisplayFor(model => model.Mobilenumber)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Email)</th>
+                            <td>@Html.DisplayFor(model => model.Email)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Address)</th>
+                            <td>@Html.DisplayFor(model => model.Address)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.State)</th>
+                            <td>@Html.DisplayFor(model => model.State)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.City)</th>
+                            <td>@Html.DisplayFor(model => model.City)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Username)</th>
+                            <td>@Html.DisplayFor(model => model.Username)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("DeleteConfirmed", "Admin", new { id = Model.UserSignupId }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions text-center">
+                            <input type="submit" value="Delete" class="btn btn-danger" /> 
+                            @Html.ActionLink("Cancel", "UserDetails", "Admin", null, new { @class = "btn btn-secondary" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

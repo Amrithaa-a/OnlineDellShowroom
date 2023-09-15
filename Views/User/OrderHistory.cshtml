@@ -1,0 +1,58 @@
+﻿@model List<OnlineDellShowroom.Models.OrderView>
+
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "OrderHistory";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Order History</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            You haven't placed any orders yet.
+        </div>
+    }
+    else
+    {
+<form>
+    <div class="row">
+        @foreach (var order in Model)
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        Order Date: @order.OrderDate
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Order ID: @order.OrderId</h5>
+                        <p class="card-text"><strong>Name:</strong> @order.Name</p>
+                        <p class="card-text"><strong>Address:</strong> @order.Address</p>
+                        <p class="card-text"><strong>Contact Number:</strong> @order.ContactNumber</p>
+                        <p class="card-text"><strong>Pincode:</strong> @order.Pincode</p>
+                        <p class="card-text"><strong>Order Status:</strong> @order.OrderStatus</p>
+                        @if (order.OrderStatus == "Pending")
+                        {
+                           
+                            <button class="btn btn-danger" onclick="showConfirmation(@order.OrderId)">Cancel Order</button>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+            }
+
+            <p class="mt-4">
+                @Html.ActionLink("View products", "Index", "User", null, new { @class = "btn btn-primary" })
+            </p>
+    </div>
+<script src="~/Scripts/JavaScript/Order.js"></script>
+
+
+
+

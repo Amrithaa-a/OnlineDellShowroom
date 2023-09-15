@@ -1,0 +1,23 @@
+﻿@model OnlineDellShowroom.Models.Laptop
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "View Laptop";
+}
+
+<h2 class="text-center mt-4">View Laptop</h2>
+
+<div class="container mt-4">
+    <div class="card bg-light p-4 rounded-lg shadow mx-auto" ">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="Laptop Image" class="img-fluid mt-2" style="max-height: 200px;" />
+            }
+            <h3>@Model.LaptopName</h3>
+            <p>@Model.Description</p>
+            <p>Price: $@Model.Price</p>
+            <a href="@Url.Action("ProductList", "Admin")" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

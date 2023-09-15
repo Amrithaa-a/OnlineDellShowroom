@@ -1,0 +1,41 @@
+﻿@model List<OnlineDellShowroom.Models.Laptop>
+
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "Admin Page";
+    <link href="~/Content/CSS/User.css" rel="stylesheet" />
+}
+
+<h2 class="text-center mt-4">Welcome to the Online Dell Showroom</h2>
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var laptop in Model)
+        {
+            var laptopData = laptop as OnlineDellShowroom.Models.Laptop;
+
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-box">
+                        <img src="@laptopData.ImageUrl" alt="@laptopData.LaptopName" class="card-img-top" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@laptopData.LaptopName</h5>
+                        <p class="card-text">@laptopData.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">Price: ₹@laptopData.Price</p>
+
+                        <form method="post" action="@Url.Action("AddToCart", "User")">
+                            @Html.AntiForgeryToken() 
+                            @Html.Hidden("laptopId", laptopData.LaptopId)
+                            <div class="quantity-input">
+                                <input type="number" class="form-control" name="quantity" value="1" min="1" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

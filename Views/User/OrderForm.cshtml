@@ -1,0 +1,199 @@
+﻿@model OnlineDellShowroom.Models.OrderView
+
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "Order Form";
+}
+
+<div class="container mt-4 bg-light rounded-lg shadow p-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Order Form</h2>
+            @using (Html.BeginForm("PlaceOrder", "User", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+            {
+                @Html.AntiForgeryToken()
+                
+                <div class="form-group mb-4">
+                    @Html.Label("Name:")
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required", placeholder = "Name", id = "Name" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", id = "NameError" })
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.Label("Username:")
+                    @Html.TextBox("Username", User.Identity.Name, new { @class = "form-control", disabled = "disabled" })
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.Label("Total price :", htmlAttributes: new { @class = "form-label control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.SelectedTotalPrice, new { @class = "form-control", id = "selectedTotalPrice" })
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Address)
+                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control", required = "required", placeholder = "Address", id = "Address" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger", id = "AddressError" })
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.Label("Contact number:")
+                    @Html.TextBoxFor(model => model.ContactNumber, new { @class = "form-control", required = "required", placeholder = "Contact number", id = "ContactNumber" })
+                    @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger", id = "ContactNumberError" })
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Pincode)
+                    @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control", required = "required", placeholder = "Pincode", id = "Pincode" })
+                    @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger", id = "PincodeError" })
+                </div>
+                <div class="form-group mb-4 mb-4">
+                    @Html.Label("Card number:")
+                    @Html.TextBoxFor(model => model.CreditCardNumber, new { @class = "form-control", required = "required", id = "CreditCardNumber", placeholder = "Enter 16 digits valid number", pattern = "[0-9]{16}", title = "Please enter a 16-digit credit card number" })
+                    @Html.ValidationMessageFor(model => model.CreditCardNumber, "", new { @class = "text-danger", id = "CreditCardNumberError" })
+                    <small class="form-text text-muted">Valid card formats: Visa (starts with 4) or MasterCard (starts with 5)</small>
+                </div>
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Expiration month:")
+                        @Html.TextBoxFor(model => model.ExpirationMonth, new { @class = "form-control", required = "required", placeholder = "MM", id = "ExpirationMonth", value = "" })
+                        @Html.ValidationMessageFor(model => model.ExpirationMonth, "", new { @class = "text-danger", id = "ExpirationMonthError" })
+                    </div>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        @Html.Label("Experation year:")
+                        @Html.TextBoxFor(model => model.ExpirationYear, new { @class = "form-control", required = "required", placeholder = "YYYY", id = "ExpirationYear", value = "" })
+                        @Html.ValidationMessageFor(model => model.ExpirationYear, "", new { @class = "text-danger", id = "ExpirationYearError" })
+                    </div>
+                </div>
+
+
+                <div class="form-group mb-4">
+                    @Html.Label("Cvv")
+                    @Html.TextBoxFor(model => model.CVV, new { @class = "form-control", required = "required", id = "CVV", pattern = "[0-9]{3,4}", title = "Please enter a valid 3 or 4-digit CVV" })
+                    @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger", id = "CVVError" })
+                </div>
+
+
+                <!-- Hidden field and submit button -->
+                <!--<input type="hidden" id="selectedItemsData" name="selectedItemsData" />-->
+                <!-- Add this hidden input field for selected items data -->
+                @Html.Hidden("selectedItemsData", "", new { id = "selectedItemsData" })
+
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            }
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/JavaScript/Order.js"></script>
+<script>
+    $(document).ready(function () {
+        console.log("Script loaded");
+
+        // Get the selected total price from session storage
+        var selectedTotalPrice = sessionStorage.getItem("selectedTotalPrice");
+
+        // Update the selected total price on the page
+        if (selectedTotalPrice !== null) {
+            $("#selectedTotalPrice").text("₹" + selectedTotalPrice);
+        } else {
+            console.log("SelectedTotalPrice is null.");
+        }
+
+        // Other code...
+    });
+    $(document).ready(function () {
+        // Validation functions
+        $('#CreditCardNumber').on('focusout', function () {
+            var creditCardNumber = $(this).val();
+            if (!isValidCreditCard(creditCardNumber)) {
+                $('#CreditCardNumberError').text('Invalid credit card number');
+            } else {
+                $('#CreditCardNumberError').text('');
+            }
+        });
+
+        function isValidCreditCard(creditCardNumber) {
+            // Remove spaces and non-numeric characters
+            var cleanedNumber = creditCardNumber.replace(/\s/g, '').replace(/\D/g, '');
+
+            // Check if the number matches a supported card pattern
+            var cardPatterns = {
+                visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+                mastercard: /^5[1-5][0-9]{14}$/,
+                amex: /^3[47][0-9]{13}$/
+            };
+
+            for (var cardType in cardPatterns) {
+                if (cardPatterns.hasOwnProperty(cardType) && cardPatterns[cardType].test(cleanedNumber)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Validate expiration month and year
+        $('#ExpirationMonth, #ExpirationYear').on('focusout', function () {
+            var expirationMonth = $('#ExpirationMonth').val();
+            var expirationYear = $('#ExpirationYear').val();
+            if (!isValidExpiration(expirationMonth, expirationYear)) {
+                $('#ExpirationMonthError').text('Invalid expiration date');
+                $('#ExpirationYearError').text('Invalid expiration date');
+            } else {
+                $('#ExpirationMonthError').text('');
+                $('#ExpirationYearError').text('');
+            }
+        });
+
+        function isValidExpiration(expirationMonth, expirationYear) {
+            var currentYear = new Date().getFullYear();
+            var currentMonth = new Date().getMonth() + 1;
+
+            var month = parseInt(expirationMonth);
+            var year = parseInt(expirationYear);
+
+            if (isNaN(month) || isNaN(year)) {
+                return false;
+            }
+
+            if (year < currentYear || (year === currentYear && month < currentMonth)) {
+                return false;
+            }
+
+            if (month < 1 || month > 12) {
+                return false;
+            }
+
+            return true;
+        }
+
+        // Validate CVV
+        $('#CVV').on('focusout', function () {
+            var cvv = $(this).val();
+            if (!isValidCVV(cvv)) {
+                $('#CVVError').text('Invalid CVV');
+            } else {
+                $('#CVVError').text('');
+            }
+        });
+
+        function isValidCVV(cvv) {
+            return /^[0-9]{3,4}$/.test(cvv);
+        }
+
+        // Input formatting for credit card, expiration month, and CVV
+        $('#CreditCardNumber, #ExpirationMonth, #CVV').on('input', function () {
+            var value = $(this).val();
+            value = value.replace(/\s/g, '').replace(/\D/g, ''); // Remove spaces and non-numeric characters
+            $(this).val(value);
+        });
+
+    });
+    
+
+</script>

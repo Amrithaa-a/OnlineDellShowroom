@@ -1,0 +1,73 @@
+﻿.btn-blue {
+    background-color: white;
+    color: blue;
+    border-color: blue;
+}
+/* Custom class to remove card borders */
+.no-card-border .card {
+    border: none;
+}
+/* Custom class to add margin to the bottom of the first row */
+.mt-5 {
+    margin-bottom: 205px;
+}
+/* Custom styles for the Dell APEX image */
+.apex-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.apex-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Custom styles for the Dell APEX text */
+.apex-text {
+    font-size: 18px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Adjust the width as needed */
+    text-align: center;
+}
+
+/* Custom styles for the "Where to find us" section */
+.find-us-section {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Custom styles for the address card */
+.address-card {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Custom styles for the phone support card */
+.phone-support-card {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Custom styles for the hours of operation card */
+.hours-card {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Custom styles for the "Where to find us" section heading */
+.find-us-heading {
+    margin-bottom: 30px;
+}
+
+/* Remove card border */
+.no-card-border {
+    border: none;
+}

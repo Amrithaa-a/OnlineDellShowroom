@@ -1,0 +1,168 @@
+﻿@model List<OnlineDellShowroom.Models.CartItem>
+
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "View Cart";
+    <link href="~/Content/CSS/User.css" rel="stylesheet" />
+    ;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">View Cart</h2>
+            @if (Model != null && Model.Count > 0)
+            {
+                <form method="post" action="@Url.Action("UpdateCartItemQuantity", "User")">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Product</th>
+                                <th>Product name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="cart-item-row">
+                                    <td>
+                                        <input type="checkbox" class="item-checkbox" name="selectedItems" value="@item.LaptopId" />
+                                    </td>
+                                    <td>
+                                        <img src="@item.ImageUrl" alt="@item.LaptopName" style="max-height: 100px; object-fit: contain;">
+                                    </td>
+                                    <td>@item.LaptopName</td>
+                                    <td class="price" data-price="@item.Price">₹@item.Price</td>
+                                    <td>
+                                        <input type="number" class="form-control quantity" name="quantity" value="@item.Quantity" min="1" />
+                                    </td>
+                                    <td class="subtotal">₹@(item.Price * item.Quantity)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            @Html.AntiForgeryToken()
+                            <button type="button" class="btn btn-danger clear-selected-items-btn">Clear Selected Items</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p class="d-inline-block mr-3"><span id="selectedTotalPrice">0.00</span></p>
+                            <a href="@Url.Action("OrderForm", "User", new { SelectedTotalPrice = ViewBag.SelectedTotalPrice })" class="btn btn-success d-inline-block" id="buyNowBtn">Buy Now</a>
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    Cart is empty.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/JavaScript/Order.js"></script> 
+    <script>
+        $(document).ready(function () {
+
+
+            console.log("Script loaded");
+
+            // Handle "Buy Now" button click
+            $('#buyNowBtn').on('click', function (e) {
+                // Check if any items are selected for buying
+                var selectedItems = $('.item-checkbox:checked');
+                if (selectedItems.length === 0) {
+                    alert('Please select at least one item to buy.');
+                    e.preventDefault(); // Prevent the default link behavior
+                } else {
+                    updateSelectedTotalPrice();
+                }
+            });
+
+            // Function to calculate subtotal and update the total price
+            function updateSubtotal() {
+                var total = 0;
+                $(".cart-item-row").each(function () {
+                    var $row = $(this);
+                    var quantity = parseInt($row.find(".quantity").val());
+                    var price = parseFloat($row.find(".price").data("price"));
+                    var subtotal = quantity * price;
+                    total += subtotal;
+                    $row.find(".subtotal").text("₹" + subtotal.toFixed(2));
+                });
+                updateSelectedTotalPrice(); // Update the selected total as well
+            }
+
+            // Function to update selected total price
+            function updateSelectedTotalPrice() {
+                var selectedTotal = 0;
+
+                // Iterate through checked checkboxes and update selected total
+                $(".item-checkbox:checked").each(function () {
+                    var $row = $(this).closest(".cart-item-row");
+                    var price = parseFloat($row.find(".price").data("price"));
+                    var quantity = parseInt($row.find(".quantity").val());
+                    selectedTotal += price * quantity;
+                });
+
+                if (selectedTotal === 0) {
+                    $("#selectedTotalPrice").text("₹0.00");
+                } else {
+                    $("#selectedTotalPrice").text("₹" + selectedTotal.toFixed(2));
+
+                    // Store the selected total price in a session variable
+                    sessionStorage.setItem("selectedTotalPrice", selectedTotal.toFixed(2));
+                }
+            }
+
+            // Call updateSelectedTotalPrice initially
+            updateSelectedTotalPrice();
+
+
+            // Call updateSubtotal initially
+            updateSubtotal();
+
+            // Update subtotal when quantity input changes
+            $(".quantity").on("input", function () {
+                updateSubtotal();
+            });
+
+            // Update selected total when checkboxes change
+            $(".item-checkbox").on("change", function () {
+                updateSelectedTotalPrice();
+            });
+
+            // Clear selected items button click event
+            $(".clear-selected-items-btn").on("click", function () {
+                var selectedLaptopIds = $(".item-checkbox:checked").map(function () {
+                    return parseInt($(this).val()); // Parse as integer
+                }).get();
+
+                if (selectedLaptopIds.length === 0) {
+                    alert("Please select at least one item to delete.");
+                    return;
+                }
+
+                $.post("/User/RemoveSelectedCartItems", { laptopIds: selectedLaptopIds }, function (data) {
+                    if (data.success) {
+                        $(".item-checkbox:checked").closest(".cart-item-row").remove();
+                        updateSubtotal();
+                        updateSelectedTotalPrice();
+                    }
+                });
+            });
+
+
+        });
+
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@model List<OnlineDellShowroom.Models.OrderView>
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "Pending Orders";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h2 class="text-center">New orders</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Username</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
+                            {
+                                <tr>
+                                    <td>@order.OrderId</td>
+                                    <td>@order.Username</td>
+                                    <td>@order.OrderStatus</td>
+                                    <td>
+                                        @if (order.OrderStatus == "Pending")
+                                        {
+                                            @Html.AntiForgeryToken() @* Add AntiForgeryToken *@
+
+                                            <button class="btn btn-success" onclick="approveOrder(@order.OrderId)">Approve</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function approveOrder(orderId) {
+            // Get the Anti-Forgery Token value from the form
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("ApproveOrder", "Admin")',
+                type: 'POST',
+                data: { orderId: orderId, __RequestVerificationToken: token }, // Include the token in the data
+                success: function (result) {
+                    if (result.success) {
+                        location.reload(); // Reload the page to reflect the status change
+                    } else {
+                        alert('Failed to approve order. Please try again.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred while processing the request. Please try again later.');
+                    console.log(error); // Log the error details in the browser console for debugging
+                }
+            });
+        }
+    </script>
+}

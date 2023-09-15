@@ -1,0 +1,5 @@
+
+Log Entry : 
+08/12/2023 09:46:09
+Error in: https://localhost:44320/Admin/EditLaptop/1012. Error Message: Procedure or function 'SPU_LaptopDetails' expects parameter '@NewImageUrl', which was not supplied.
+__________________________

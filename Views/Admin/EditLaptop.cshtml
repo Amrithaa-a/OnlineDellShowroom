@@ -1,0 +1,60 @@
+﻿@model OnlineDellShowroom.Models.EditLaptopViewModel
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "Edit Laptop";
+}
+
+<h2 class="text-center mt-4">Edit details</h2>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-light p-4 rounded-lg shadow">
+                @using (Html.BeginForm("EditLaptop", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.LaptopId)
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.LaptopName)
+                    @Html.TextBoxFor(model => model.LaptopName, new { @class = "form-control" })
+                    <span id="laptopNameError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+                    <span id="descriptionError" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Current image</label>
+                </div>
+                <div class="form-group mb-4">
+                    <img src="@Model.ExistingImageUrl" alt="Laptop Image" class="img-fluid" style="max-height: 200px;" />
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="newImageFileInput">Choose new image</label>
+                    <div class="form-group mb-4">
+                        <input type="file" name="NewImageFile" accept="image/*" class="form-control-file" id="imageFileInput" />
+                        <span id="fileError" class="text-danger"></span>
+                    </div>
+                    </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Price)
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                    <span id="priceError" class="text-danger"></span>
+                </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="@Url.Action("ProductList", "Admin")" class="btn btn-secondary">Cancel</a>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/JavaScript/Userscript.js"></script>

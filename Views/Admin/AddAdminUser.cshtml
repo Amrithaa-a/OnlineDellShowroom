@@ -1,0 +1,39 @@
+﻿@model OnlineDellShowroom.Models.AdminUser
+
+@{
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    ViewBag.Title = "Add Admin User";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-light p-4 rounded-lg shadow">
+                <h2 class="card-title text-center mt-4">Add Admin User</h2>
+
+                @using (Html.BeginForm("AddAdminUser", "Admin", FormMethod.Post, new { @class = "myForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Username)
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @id = "Username" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger", @id = "usernameError" })
+                    </div>
+
+                    <div class="form-group ">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "passwordError" })
+                    </div>
+
+                    <div class="form-group text-center mt-3">
+                        <input type="submit" id="submitButton" value="Add Admin User" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/JavaScript/Onfocusoutadminuser.js"></script>

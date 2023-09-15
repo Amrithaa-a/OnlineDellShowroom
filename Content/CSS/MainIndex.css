@@ -1,0 +1,318 @@
+﻿/* Custom styles for the search bar */
+.custom-search-bar {
+    flex: 1;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Adjust the position of the search bar for small screens */
+@media (max-width: 500px) {
+    .navbar-collapse {
+        flex-direction: column;
+    }
+
+    /* Place search bar below the logo */
+    .custom-search-bar {
+        order: 2;
+        margin-top: 0;
+    }
+
+    /* Center the search bar */
+    .navbar-nav {
+        justify-content: center;
+        flex: 1;
+    }
+        .navbar-nav .nav-item {
+            margin: 5px 10px; 
+        }
+}
+
+/* Additional styling for the search icon */
+.custom-search-icon {
+    color: black;
+    cursor: pointer;
+    height: 40px;
+}
+.navbar-nav .nav-item {
+    margin: 10px 10px; 
+}
+
+
+/* Reset some default margins and paddings */
+body, h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global font family and color */
+body {
+    font-family: "Arial", sans-serif;
+    color: #333; /* Adjust color as needed */
+}
+
+/* Dell title style */
+.dell-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #007bff; /* Dell blue color */
+}
+
+/* Dell subtitle style */
+.dell-subtitle {
+    font-size: 20px;
+    margin-top: 10px;
+    color: #777; /* Light gray color */
+}
+
+/* Image style */
+.dell-image {
+    max-width: 100%;
+    height: auto;
+    /* Increase the image size */
+    max-height: 400px; /* Adjust the value as needed */
+}
+
+/* Center the text within the column */
+.text-center {
+    text-align: center;
+}
+
+/* Custom style to make the container full screen */
+.custom-container {
+    min-height: calc(100vh - 56px); /* Set minimum height to full screen height minus navbar height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0%;
+    padding: 20px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+/* Custom style to align the image to the right */
+.dell-image-container {
+    text-align: right;
+}
+
+/* Style for the button group */
+.button-group {
+    margin-top: 20px; 
+}
+
+    .button-group button {
+        margin: 5px; /* Add some space between buttons */
+    }
+
+/* Card style */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Explore Dell Technologies Section */
+.explore-section {
+    background-color: #f0f0f0; 
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 50px; 
+}
+
+/* Explore Dell Technologies Heading */
+.explore-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff; 
+    margin-bottom: 20px;
+}
+
+/* Explore Dell Technologies Card Title */
+.explore-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; 
+    margin-bottom: 10px;
+}
+
+/* Adjust the container width to full screen */
+@media (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+}
+/* Designers section styles */
+.designers-section {
+    background-color: white; 
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 50px; 
+}
+
+.designers-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Back to College section styles */
+.back-to-college-text {
+    padding: 70px; 
+    text-align: center;
+}
+
+    .back-to-college-text h6 {
+        font-weight: bold;
+        padding: 10px;
+        font-size: 20px; 
+    }
+
+    .back-to-college-text h3 {
+        font-size: 28px;
+    }
+
+    .back-to-college-text p {
+        font-size: 18px; 
+        padding: 10px; 
+    }
+
+/* Semi Annual Sale section styles */
+.semi-annual-sale-section {
+    background-color: #fff; 
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 50px; 
+}
+
+.semi-annual-sale-text {
+    padding: 70px;
+}
+
+
+    .semi-annual-sale-text h3 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff; 
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+
+
+    .semi-annual-sale-text p {
+        font-size: 18px;
+        color: #333; 
+        text-align:center;
+    }
+
+.laptop-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px; 
+}
+/* Button styles */
+.btn {
+    background-color: #fff; 
+    color: #007bff; 
+    border: none; 
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    /* Adjust the hover style for buttons */
+    .btn:hover {
+        background-color: white; 
+        color: #007bff; 
+    }
+/* Separator styles */
+.separator {
+    
+    font-size: 20px;
+    font-weight:lighter;
+    margin: 0 1px; /* Add space on both sides of the separator */
+}
+/* Dell Support Section */
+.dell-support-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 50px; 
+}
+
+.dell-support-text h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dell-support-text p {
+    font-size: 18px;
+    color: #333; 
+    text-align: center;
+}
+
+.support-list {
+    list-style-type: none; 
+    padding-left: 0;
+}
+
+    .support-list li {
+        margin-bottom: 15px;
+    }
+
+/* Style for support links */
+.support-link {
+    font-weight: bold;
+}
+
+    .support-link a {
+        color: #007bff; 
+        text-decoration: none; 
+    }
+
+        .support-link a:hover {
+            text-decoration: underline; 
+        }
+
+/* Add horizontal line after 2nd, 4th, and 6th li elements */
+.support-list li:nth-child(2n)::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc; 
+    margin-top: 10px; 
+}
+
+/* Custom styles for responsive typography */
+@media (max-width: 768px) {
+    .h6-responsive {
+        font-size: 16px; 
+    }
+
+    .h3-responsive {
+        font-size: 28px; 
+    }
+
+    .p-responsive {
+        font-size: 14px; 
+    }
+}

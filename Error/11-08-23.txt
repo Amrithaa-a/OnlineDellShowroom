@@ -1,0 +1,36 @@
+
+Log Entry : 
+08/11/2023 14:07:25
+Error in: https://localhost:44320/User/UserProfile. Error Message: This is a test exception.
+__________________________
+
+Log Entry : 
+08/11/2023 19:27:08
+Error in: https://localhost:44320/Admin/EditLaptop/1004. Error Message: Procedure or function 'SPU_LaptopDetails' expects parameter '@ImageUrl', which was not supplied.
+__________________________
+
+Log Entry : 
+08/11/2023 20:21:24
+Error in: https://localhost:44320/Admin/EditLaptop/2004. Error Message: Procedure or function 'SPU_LaptopDetails' expects parameter '@ImageUrl', which was not supplied.
+__________________________
+
+Log Entry : 
+08/11/2023 20:23:54
+Error in: https://localhost:44320/Admin/EditLaptop/2004. Error Message: Procedure or function SPU_LaptopDetails has too many arguments specified.
+__________________________
+
+Log Entry : 
+08/11/2023 20:41:27
+Error in: https://localhost:44320/Admin/EditLaptop/1. Error Message: Procedure or function 'SPU_LaptopDetails' expects parameter '@ImageUrl', which was not supplied.
+__________________________
+
+Log Entry : 
+08/11/2023 22:54:29
+Error in: https://localhost:44320/Admin/EditLaptop/1. Error Message: Procedure or function 'SPU_LaptopDetails' expects parameter '@NewImageUrl', which was not supplied.
+__________________________
+
+Log Entry : 
+08/11/2023 23:54:37
+Error in: https://localhost:44320/User/EditProfile?userSignupId=6009. Error Message: String reference not set to an instance of a String.
+Parameter name: s
+__________________________
